@@ -2,12 +2,11 @@ const { Videogame, Genre } = require("../db");
 const { default: axios } = require("axios");
 const { API_KEY } = process.env;
 async function fetchAll(url) {
-	const results = [];
-	const pages = [1, 2, 3, 4, 5];
-	const queries = [];
-	pages.forEach((page) => {
-		queries.push(axios.get(url + `&page=${page}`));
-	});
+	// const pages = [1, 2, 3, 4, 5];
+	// const queries = [];
+	// pages.forEach((page) => {
+	// 	queries.push(axios.get(url + `&page=${page}`));
+	// });
 	// Promise.all(queries)
 	// 	.then((queryResults) => {
 	// 		console.log(queryResults.length);
@@ -26,25 +25,30 @@ async function fetchAll(url) {
 	// 	.then(() => results)
 	// 	.catch((error) => console.log(error));
 
-	let hasNext = false;
-	do {
-		hasNext = false;
-		let r = await axios.get(url);
-		let response = r.data;
-		results.push(
-			...response.results.map((e) => ({
-				id: e.id,
-				name: e.name,
-				background_image: e.background_image,
-				genres: e.genres.map((r) => r.name),
-			}))
-		);
-		if (response.next && results.length < 100) {
-			hasNext = true;
-			url = response.next;
-		}
-	} while (hasNext);
-	return results;
+	try {
+		const results = [];
+		let hasNext = false;
+		do {
+			hasNext = false;
+			let r = await axios.get(url);
+			let response = r.data;
+			results.push(
+				...response.results.map((e) => ({
+					id: e.id,
+					name: e.name,
+					background_image: e.background_image,
+					genres: e.genres.map((r) => r.name),
+				}))
+			);
+			if (response.next && results.length < 100) {
+				hasNext = true;
+				url = response.next;
+			}
+		} while (hasNext);
+		return results;
+	} catch (error) {
+		console.log(error);
+	}
 }
 function isUUID(string) {
 	return /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi.test(

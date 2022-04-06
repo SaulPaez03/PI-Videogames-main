@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearVideogameDetails, getVideogameDetails } from "../redux/actions";
+import { Link } from "react-router-dom";
 export default function VideogameDetails({ videogameID: id }) {
+	<button></button>;
 	const dispatch = useDispatch();
 	const {
 		name,
@@ -20,6 +22,9 @@ export default function VideogameDetails({ videogameID: id }) {
 	}, []);
 	return (
 		<div>
+			<Link to="/videogames">
+				<button>Go back</button>
+			</Link>
 			<h3>{name}</h3>
 			<img style={{ width: "70%" }} src={background_image} alt="" />
 			<p>{description}</p>

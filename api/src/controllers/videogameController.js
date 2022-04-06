@@ -15,11 +15,21 @@ module.exports = {
 			}
 			if (isUUID(idVideogame)) {
 				let DBResults = await Videogame.findByPk(idVideogame, {
-					include: Genre,
+					include: {
+						model: Genre,
+						attributes: ["name"],
+					},
 				});
+				DBResults = {
+					...DBResults.dataValues,
+					genres: DBResults.dataValues.genres.map(
+						(genre) => genre.dataValues.name
+					),
+				};
 				if (DBResults) {
 					return res.json(DBResults);
 				}
+				console.log(DBResults.description);
 			} else {
 				let APIResults = await axios.get(
 					`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`
@@ -50,20 +60,32 @@ module.exports = {
 	},
 	async setNewVideogame(req, res) {
 		try {
-			const { name, description, released, rating, genres, platforms } =
-				req.body;
+			let {
+				name,
+				description,
+				released,
+				rating,
+				genres,
+				platforms,
+				background_image,
+			} = req.body;
+			if (background_image === undefined) {
+				background_image =
+					"https://images.pexels.com/photos/596750/pexels-photo-596750.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260";
+			}
 			const NewVideogame = await Videogame.create({
 				name,
 				description,
 				released,
 				rating,
 				platforms,
+				background_image,
 			});
-			console.log(genres);
 			let genresIds = await Genre.findAll({
 				attributes: ["id"],
 				where: { name: genres },
 			});
+			console.table(genresIds);
 			NewVideogame.addGenres(genresIds);
 			res.send("Succesfully created the new videogame");
 		} catch (error) {

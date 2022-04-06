@@ -97,7 +97,7 @@ module.exports = {
 
 			res.json(results);
 		} catch (error) {
-			// console.log(error);
+			console.log(error);
 		}
 	},
 };

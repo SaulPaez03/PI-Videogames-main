@@ -15,6 +15,9 @@ module.exports = (sequelize) => {
 				type: DataTypes.STRING,
 				allowNull: false,
 			},
+			description: {
+				type: DataTypes.TEXT,
+			},
 			released: {
 				type: DataTypes.DATEONLY,
 			},

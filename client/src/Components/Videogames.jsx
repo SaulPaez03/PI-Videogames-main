@@ -6,6 +6,7 @@ import {
 	getAllVideogames,
 	getVideogamesByName,
 } from "../redux/actions";
+import { Link } from "react-router-dom";
 import { Paginate } from "./Paginate";
 import { VideogameCard } from "./VideogameCard";
 import style from "./Styles/Videogames.module.css";
@@ -141,6 +142,9 @@ export default function Videogames() {
 	const { videogamesPage } = style;
 	return (
 		<div>
+			<Link to="/videogames/Create">
+				<button>Create</button>
+			</Link>
 			<div id="filters">
 				<form onSubmit={(e) => handleSearch(e)} method="get">
 					<input
@@ -188,7 +192,7 @@ export default function Videogames() {
 					<button type="submit">Filter!</button>{" "}
 				</form>
 			</div>
-			<div>
+			<div id="order">
 				<label htmlFor="order">Order by: </label>
 				<select
 					name="order"
@@ -201,8 +205,8 @@ export default function Videogames() {
 						}));
 					}}
 				>
-					<option value={"alph"}>Alphabetically</option>
-					<option value={"rate"}>By rating</option>
+					<option value={"alph"}>Name</option>
+					<option value={"rate"}>Rating</option>
 				</select>
 
 				<label htmlFor="mode">Mode: </label>
@@ -223,31 +227,33 @@ export default function Videogames() {
 				<button onClick={(e) => handleOrder(e)}>Order!</button>
 			</div>
 			<button onClick={() => clearFilters()}>Clear Filters</button>
-			{!displayedVideogames.length && (
-				<div>
-					<h3>No videogames found</h3>
-				</div>
-			)}
-			{displayedVideogames.length && (
-				<div id={videogamesPage}>
-					{displayedVideogames
-						.slice(range.start, range.end)
-						.map(({ id, name, genres, background_image }) => (
-							<VideogameCard
-								key={id}
-								id={id}
-								name={name}
-								background_image={background_image}
-								genres={genres}
-							/>
-						))}
-				</div>
-			)}
-			<Paginate
-				pageCount={pageCount}
-				paginate={paginate}
-				currentPage={currentPage}
-			></Paginate>
+			<div id="results">
+				{!displayedVideogames.length && (
+					<div>
+						<h3>No videogames found</h3>
+					</div>
+				)}
+				{displayedVideogames.length && (
+					<div id={videogamesPage}>
+						{displayedVideogames
+							.slice(range.start, range.end)
+							.map(({ id, name, genres, background_image }) => (
+								<VideogameCard
+									key={id}
+									id={id}
+									name={name}
+									background_image={background_image}
+									genres={genres}
+								/>
+							))}
+					</div>
+				)}
+				<Paginate
+					pageCount={pageCount}
+					paginate={paginate}
+					currentPage={currentPage}
+				></Paginate>
+			</div>
 		</div>
 	);
 }

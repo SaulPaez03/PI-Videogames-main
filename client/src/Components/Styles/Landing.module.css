@@ -1,0 +1,43 @@
+#container {
+	background: url("../../assets/Images/landingBackground.jpg") no-repeat;
+	background-size: 100% 100%;
+	background-position: center center;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
+}
+#link {
+	position: relative;
+	top: 10%;
+	left: 3%;
+	width: 20vw;
+	height: 10vh;
+	text-decoration: none;
+	cursor: pointer;
+}
+#button {
+	display: flex;
+	background-color: #d5c1a5;
+	border-radius: 50px;
+	color: #000;
+	font-size: 40px;
+	padding: 10px;
+	width: 20vw;
+	height: 10vh;
+	max-width: 300px;
+	margin: 0 auto;
+	text-decoration: none;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0px 15px 4px #24112d;
+	cursor: pointer;
+}
+#github {
+	height: 120px;
+	width: 120px;
+	position: relative;
+	top: 85%;
+	left: 35%;
+}

@@ -1,5 +1,170 @@
+/* #container {
+	display: flex;
+	flex-wrap: no-wrap;
+	height: 100vh;
+} */
+@font-face {
+	font-family: CarroisGothicSC;
+	src: url("../../assets/Fonts/CarroisGothicSC-Regular.ttf");
+}
+* {
+	font-family: CarroisGothicSC;
+	font-weight: 400;
+}
 #videogamesPage {
+	margin: 0 0;
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-evenly;
+	align-items: center;
+}
+#results {
+	position: absolute;
+	top: 0;
+	left: 26%;
+	width: 74%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #111419;
+}
+#sidebar {
+	position: fixed;
+	display: flex;
+	flex-direction: column;
 	justify-content: space-around;
+	background-color: #1e1e1e;
+	width: 26%;
+	height: 100vh;
+	color: #ffffff;
+}
+#sidebar label {
+	padding-left: 10px;
+}
+.sidebar_item {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	width: 100%;
+	height: 20%;
+	margin: 0 0;
+	font-size: 30px;
+}
+.sidebar_item form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 100%;
+}
+#searchForm {
+	width: 80%;
+	border-radius: 50px;
+	height: 55px;
+	font-size: 20px;
+	box-shadow: 0px 4px 4px inset rgba(0, 0, 0, 0.5);
+	text-align: center;
+}
+.btn {
+	width: 150px;
+	height: 58px;
+	border-radius: 50px;
+	border: 1px;
+
+	color: white;
+	font-size: 20px;
+	background-size: 200% auto;
+	transition: 0.5s ease;
+	cursor: pointer;
+}
+.btn_big {
+	width: 215px;
+	height: 74px;
+	border-radius: 50px;
+	border: 1px;
+	color: white;
+	font-size: 20px;
+	background-size: 200% auto;
+	transition: 0.5s ease;
+	cursor: pointer;
+}
+.itemOptions {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: 100%;
+	height: 100%;
+}
+.dropdown {
+	width: 150px;
+	height: 58px;
+	border-radius: 50px;
+	border: 1px;
+	text-align: center;
+	color: white;
+	font-size: 20px;
+	background-size: 200% auto;
+	transition: 0.5s ease;
+	cursor: pointer;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+
+.dropdown option {
+	background-color: #1e1e1e;
+	text-align: center;
+	cursor: pointer;
+}
+
+.separator {
+	width: 100%;
+	height: 10px;
+	background-color: #4e4e4e;
+}
+.fuc_tur {
+	background-image: linear-gradient(
+		to right,
+		#d479ff 0%,
+		#6f8ce3 51%,
+		#00a1c4 100%
+	);
+}
+.fuc_tur:hover {
+	background-position: center right;
+}
+.azu_vin {
+	background-image: linear-gradient(
+		to right,
+		#424874 0%,
+		#713860 51%,
+		#ab2346 100%
+	);
+}
+.azu_vin:hover {
+	background-position: center right;
+}
+.nar_ama {
+	background-image: linear-gradient(to right, #ff3c38 0%, #ffe74c 100%);
+}
+.nar_ama:hover {
+	background-position: center right;
+}
+.azu_ver {
+	background-image: linear-gradient(to right, #79b7ff 0%, #10c400 100%);
+}
+.azu_ver:hover {
+	background-position: center right;
+}
+#searchForm:focus,
+.btn:hover,
+.btn_big:hover,
+.btn:focus,
+.btn_big:focus,
+.dropdown:focus,
+.dropdown:hover {
+	outline: none;
 }

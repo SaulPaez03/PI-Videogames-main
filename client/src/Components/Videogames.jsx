@@ -10,7 +10,24 @@ import { Link } from "react-router-dom";
 import { Paginate } from "./Paginate";
 import { VideogameCard } from "./VideogameCard";
 import style from "./Styles/Videogames.module.css";
-
+import Loading from "../assets/Images/Loading.gif";
+const {
+	videogamesPage,
+	sidebar,
+	sidebar_item,
+	container,
+	results,
+	searchForm,
+	btn,
+	btn_big,
+	dropdown,
+	itemOptions,
+	separator,
+	fuc_tur,
+	azu_vin,
+	nar_ama,
+	azu_ver,
+} = style;
 export default function Videogames() {
 	//How many valeus should be rendered by page
 	let valuesPerPage = 15;
@@ -36,8 +53,8 @@ export default function Videogames() {
 	let [originFilter, setOriginFilter] = useState("default");
 
 	let [orderValues, setOrderValues] = useState({
-		by: "alph",
-		mode: "asc",
+		by: "default",
+		mode: "default",
 	});
 	//Search Form input value
 	let [searchValue, setSearchValue] = useState("");
@@ -84,14 +101,15 @@ export default function Videogames() {
 		dispatch(clearSearchResults());
 		setDisplayedVideogames(videogames);
 		setOrderValues({
-			by: "alph",
-			mode: "asc",
+			by: "default",
+			mode: "default",
 		});
 	};
 
 	const handleSearch = (event) => {
 		event.preventDefault();
 		if (searchValue !== "") {
+			setDisplayedVideogames([]);
 			return dispatch(getVideogamesByName(searchValue));
 		}
 
@@ -117,7 +135,7 @@ export default function Videogames() {
 		event.preventDefault();
 		let { by: attr, mode } = orderValues;
 		let aux = [...displayedVideogames];
-		console.log(attr);
+
 		if (attr === "default") {
 			return;
 		}
@@ -133,119 +151,198 @@ export default function Videogames() {
 			return -1;
 		});
 		if (mode === "desc") {
-			console.log("reverse");
 			aux = aux.reverse();
 		}
 
 		setDisplayedVideogames(aux);
 	};
-	const { videogamesPage } = style;
+
 	return (
-		<div>
-			<Link to="/videogames/Create">
-				<button>Create</button>
-			</Link>
-			<div id="filters">
-				<form onSubmit={(e) => handleSearch(e)} method="get">
-					<input
-						name="searchInput"
-						type="text"
-						value={searchValue}
-						onChange={(e) => {
-							setSearchValue(e.target.value);
-						}}
-					/>
-					<button type="submit">Search</button>
-				</form>
-				<form onSubmit={(e) => handleFilter(e)}>
-					<label htmlFor="genres">Filter videogames: </label>
-					<select
-						name="genres"
-						id="genres"
-						value={genreFilter}
-						onChange={(e) => setGenreFilter(e.target.value)}
+		<div id={container}>
+			<div id={sidebar}>
+				<div id="search" className={sidebar_item}>
+					<label htmlFor="search-form">Search by name:</label>
+					<form
+						id="search-form"
+						onSubmit={(e) => handleSearch(e)}
+						method="get"
 					>
-						<option hidden value="default">
-							Select a genre
-						</option>
-						<option value="default">All genres</option>
-						{genres.map((genre) => (
-							<option key={genre} value={genre}>
-								{genre}
-							</option>
-						))}
-					</select>
-					<select
-						name="origin"
-						id="origin"
-						value={originFilter}
-						onChange={(e) => setOriginFilter(e.target.value)}
-					>
-						<option hidden value="default">
-							Select a data origin
-						</option>
-						<option value="default">All sources</option>
+						<input
+							id={searchForm}
+							name="searchInput"
+							type="text"
+							value={searchValue}
+							onChange={(e) => {
+								setSearchValue(e.target.value);
+							}}
+						/>
+						<button className={`${btn} ${fuc_tur}`} type="submit">
+							SEARCH
+						</button>
+					</form>
+				</div>
+				<div id="filters" className={sidebar_item}>
+					<label htmlFor="filter">Filter by: </label>
+					<form onSubmit={(e) => handleFilter(e)} id="filter">
+						<div className={itemOptions}>
+							<select
+								name="genres"
+								id="genres"
+								value={genreFilter}
+								onChange={(e) => setGenreFilter(e.target.value)}
+								className={`${dropdown} ${azu_vin}`}
+							>
+								<option hidden value="default">
+									GENRE
+								</option>
+								<option value="default">ALL GENRES</option>
+								{genres.map((genre) => (
+									<option key={genre} value={genre}>
+										{genre.toUpperCase()}
+									</option>
+								))}
+							</select>
+							<select
+								name="origin"
+								id="origin"
+								value={originFilter}
+								onChange={(e) =>
+									setOriginFilter(e.target.value)
+								}
+								className={`${dropdown} ${azu_vin}`}
+							>
+								<option hidden value="default">
+									SOURCE
+								</option>
+								<option value="default">ALL SOURCES</option>
 
-						<option value="API">From the API</option>
-						<option value="DB">From the DataBase</option>
-					</select>
-					<button type="submit">Filter!</button>{" "}
-				</form>
+								<option value="API">ORIGINAL</option>
+								<option value="DB">CREATED BY USERS</option>
+							</select>
+						</div>
+						<button type="submit" className={`${btn} ${fuc_tur}`}>
+							FILTER
+						</button>{" "}
+					</form>
+				</div>
+				<div id="order" className={sidebar_item}>
+					<label htmlFor="order">Order by: </label>
+					<form action="">
+						<div className={itemOptions}>
+							<select
+								name="order"
+								id="order"
+								value={orderValues.by}
+								onChange={(e) => {
+									setOrderValues((old) => ({
+										...old,
+										by: e.target.value,
+									}));
+								}}
+								className={`${dropdown} ${azu_vin}`}
+							>
+								<option value="default" hidden>
+									TRAIT
+								</option>
+								<option value={"default"}>ANY</option>
+
+								<option value={"alph"}>NAME</option>
+								<option value={"rate"}>RATING</option>
+							</select>
+							<select
+								name="mode"
+								id="mode"
+								value={orderValues.mode}
+								onChange={(e) => {
+									setOrderValues((old) => ({
+										...old,
+										mode: e.target.value,
+									}));
+								}}
+								className={`${dropdown} ${azu_vin}`}
+							>
+								<option value="default" hidden>
+									MODE
+								</option>
+								<option value={"default"}>ANY</option>
+								<option value={"desc"}>DESCENDANT</option>
+								<option value={"asc"}>ASCENDANT</option>
+							</select>
+						</div>
+
+						<button
+							className={`${btn} ${fuc_tur}`}
+							onClick={(e) => handleOrder(e)}
+						>
+							ORDER
+						</button>
+					</form>
+				</div>
+				<div>
+					<button
+						onClick={() => clearFilters()}
+						className={`${btn_big} ${nar_ama}`}
+					>
+						CLEAR FILTERS
+					</button>
+				</div>
+				<div className={separator} />
+				<Link to="/videogames/Create">
+					<button className={`${btn_big} ${azu_ver}`}>CREATE</button>
+				</Link>
 			</div>
-			<div id="order">
-				<label htmlFor="order">Order by: </label>
-				<select
-					name="order"
-					id="order"
-					value={orderValues.by}
-					onChange={(e) => {
-						setOrderValues((old) => ({
-							...old,
-							by: e.target.value,
-						}));
+
+			<div id={results}>
+				<h1
+					style={{
+						color: "white",
+						fontSize: "40px",
+						textDecoration: "underline #d479ff 5px solid",
 					}}
 				>
-					<option value={"alph"}>Name</option>
-					<option value={"rate"}>Rating</option>
-				</select>
+					VIDEOGAMES
+				</h1>
 
-				<label htmlFor="mode">Mode: </label>
-				<select
-					name="mode"
-					id="mode"
-					value={orderValues.mode}
-					onChange={(e) => {
-						setOrderValues((old) => ({
-							...old,
-							mode: e.target.value,
-						}));
-					}}
-				>
-					<option value={"desc"}>Descendant</option>
-					<option value={"asc"}>Ascendant</option>
-				</select>
-				<button onClick={(e) => handleOrder(e)}>Order!</button>
-			</div>
-			<button onClick={() => clearFilters()}>Clear Filters</button>
-			<div id="results">
 				{!displayedVideogames.length && (
-					<div>
-						<h3>No videogames found</h3>
+					<div
+						style={{
+							height: "100vh",
+							display: "flex",
+							alignItems: "center",
+							justifyContent: "center",
+							color: "white",
+						}}
+					>
+						<img src={Loading} alt="loading" />
 					</div>
 				)}
+				<Paginate
+					pageCount={pageCount}
+					paginate={paginate}
+					currentPage={currentPage}
+				></Paginate>
 				{displayedVideogames.length && (
 					<div id={videogamesPage}>
 						{displayedVideogames
 							.slice(range.start, range.end)
-							.map(({ id, name, genres, background_image }) => (
-								<VideogameCard
-									key={id}
-									id={id}
-									name={name}
-									background_image={background_image}
-									genres={genres}
-								/>
-							))}
+							.map(
+								({
+									id,
+									name,
+									genres,
+									background_image,
+									rating,
+								}) => (
+									<VideogameCard
+										key={id}
+										id={id}
+										name={name}
+										background_image={background_image}
+										genres={genres}
+										rating={rating}
+									/>
+								)
+							)}
 					</div>
 				)}
 				<Paginate

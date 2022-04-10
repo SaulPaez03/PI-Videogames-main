@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Landing from "./Components/Landing";
 import VideogameDetails from "./Components/VideogameDetails";
 import Videogames from "./Components/Videogames";
-import CreateVideogame from "./Components/Styles/CreateVideogame";
+import CreateVideogame from "./Components/CreateVideogame";
 function App() {
 	return (
 		<div className="App">

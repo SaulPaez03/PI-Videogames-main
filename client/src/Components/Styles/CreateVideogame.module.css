@@ -1,0 +1,176 @@
+* {
+	box-sizing: border-box;
+}
+
+#wrapper {
+	background-image: linear-gradient(to bottom, #3e3e3e 0%, #0c0c0c 100%);
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	color: white;
+	font-size: 30px;
+	transition: 0.5s ease;
+}
+#form {
+	display: flex;
+	height: 70%;
+	width: 70%;
+	flex-direction: column;
+	align-items: center;
+}
+#form input {
+	margin-top: 5px;
+	margin-bottom: 10px;
+	border-radius: 50px;
+	text-align: center;
+	font-size: 20px;
+	box-shadow: 0px 4px 4px inset rgba(0, 0, 0, 0.5);
+}
+#form input[type="date"],
+#form input[type="number"] {
+	padding-right: 20px;
+}
+#form .paralel {
+	display: flex;
+	justify-content: space-between;
+	width: 58vw;
+	align-items: center;
+}
+.inputBox {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+#nameInput {
+	width: 35vw;
+	height: 5vh;
+}
+#descriptionInput {
+	margin: 5px 0px 10px 0px;
+	width: 58vw;
+	height: 20vh;
+	text-align: center;
+	border-radius: 20px;
+	padding: 20px 20px;
+	overflow-y: scroll;
+	resize: none;
+	font-size: 20px;
+	box-shadow: 0px 4px 4px inset rgba(0, 0, 0, 0.5);
+}
+#wrapper ::-webkit-scrollbar {
+	background-image: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 0) 0%,
+		rgba(0, 0, 0, 0) 100%
+	);
+	border-radius: 1000px;
+	width: 10px;
+	height: 40vw;
+}
+#wrapper ::-webkit-scrollbar-thumb {
+	background-image: linear-gradient(to bottom, #005772, #610d71);
+	background-size: auto 200%;
+	border-radius: 10px;
+	transition: 1s ease;
+}
+#wrapper ::-webkit-scrollbar-thumb:hover {
+	background-position: center bottom;
+}
+#wrapper ::-webkit-scrollbar-track {
+	background: transparent;
+}
+.halfWidth {
+	width: 25vw;
+	height: 5vh;
+	margin: 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#form select {
+	width: 66%;
+	height: 100%;
+	border-radius: 50px;
+	border: 1px;
+	text-align: center;
+	color: white;
+	background-size: 200% auto;
+	transition: 0.5s ease;
+	cursor: pointer;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background-image: linear-gradient(
+		to right,
+		#424874 0%,
+		#713860 51%,
+		#ab2346 100%
+	);
+	background-size: 200% auto;
+}
+#form select option {
+	background-color: #1e1e1e;
+	text-align: center;
+	cursor: pointer;
+}
+#form select:hover {
+	background-position: center right;
+}
+#descriptionInput:focus,
+#form input:focus {
+	outline: none;
+}
+.error {
+	font-size: 15px;
+}
+.notError {
+	font-size: 20px;
+	color: white;
+}
+
+#wrapper button {
+	border-radius: 50px;
+	border: 1px;
+	color: white;
+	font-size: 20px;
+	background-size: 200% 200px;
+	transition: 0.5s ease;
+	cursor: pointer;
+}
+#wrapper button:hover {
+	background-position: center right;
+}
+.halfWidth button {
+	width: 30%;
+}
+.vinAzu {
+	background-image: linear-gradient(to right, #45003a 0%, #0f5257 100%);
+}
+.azuFuc {
+	background-image: linear-gradient(
+		to right,
+		#424874 0%,
+		#713860 51%,
+		#ab2346 100%
+	);
+}
+#goBack {
+	position: fixed;
+	left: 100px;
+	width: 10vw;
+	height: 7vh;
+}
+#create {
+	margin-top: 5vh;
+	width: 58vw;
+	height: 5vh;
+}
+.nameErrorClass {
+	border: 1px red solid;
+}
+.btn[disabled]:hover {
+	background-position: center left;
+}

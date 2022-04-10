@@ -1,0 +1,25 @@
+#wrapper {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 30%;
+	margin: 10px;
+}
+.btn {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	border: 1px;
+	color: white;
+	transition: 0.5s ease;
+	cursor: pointer;
+	font-size: 15px;
+	background-size: 200% auto;
+	background-image: linear-gradient(to right, #00ffd0 0%, #9c44c1 100%);
+}
+.btn:hover {
+	background-position: right center;
+}
+.active {
+	background-image: linear-gradient(to right, #ba2635 0%, #f3b02b 100%);
+}

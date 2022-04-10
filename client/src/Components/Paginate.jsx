@@ -7,10 +7,12 @@ export const Paginate = ({ pageCount, paginate, currentPage }) => {
 	for (let i = 1; i <= pageCount; i++) {
 		pageNumbers.push(i);
 	}
-
+	if (pageCount === 0) {
+		return null;
+	}
 	return (
 		<div id={wrapper}>
-			{currentPage != 1 && (
+			{currentPage !== 1 && (
 				<button
 					className={`${btn}`}
 					onClick={() => paginate(currentPage - 1)}
@@ -30,7 +32,7 @@ export const Paginate = ({ pageCount, paginate, currentPage }) => {
 					</button>
 				);
 			})}
-			{currentPage != pageCount && (
+			{currentPage !== pageCount && (
 				<button
 					className={`${btn}`}
 					onClick={() => paginate(currentPage + 1)}

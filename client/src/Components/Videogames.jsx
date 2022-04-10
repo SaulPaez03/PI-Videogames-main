@@ -1,4 +1,4 @@
-import React, { useState, useEffect, isValidElement } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
 	clearSearchResults,
@@ -145,7 +145,7 @@ export default function Videogames() {
 			if (a[attr] > b[attr]) {
 				return 1;
 			}
-			if (a[attr] == b[attr]) {
+			if (a[attr] === b[attr]) {
 				return 0;
 			}
 			return -1;

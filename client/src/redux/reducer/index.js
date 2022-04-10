@@ -14,7 +14,7 @@ const initialState = {
 	genres: [],
 };
 
-export default (state = initialState, { type, payload }) => {
+const reducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case GET_ALL_VIDEOGAMES:
 			return { ...state, videogames: payload };
@@ -33,3 +33,4 @@ export default (state = initialState, { type, payload }) => {
 			return state;
 	}
 };
+export default reducer;

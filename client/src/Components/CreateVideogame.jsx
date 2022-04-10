@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGenres } from "../redux/actions";
@@ -170,8 +170,8 @@ export default function CreateVideogame() {
 				released: release,
 				genres: selectedGenres,
 				platforms,
-			}).data;
-			console.log(posted);
+			});
+			alert(posted.data);
 		}
 	};
 	const validateAll = () => {

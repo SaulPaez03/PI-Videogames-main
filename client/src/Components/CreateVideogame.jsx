@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGenres } from "../redux/actions";

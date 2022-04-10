@@ -1,4 +1,5 @@
 const { Videogame, Genre } = require("../db");
+const { Op } = require("sequelize");
 const { default: axios } = require("axios");
 const { API_KEY } = process.env;
 async function fetchAll(url) {
@@ -25,30 +26,6 @@ async function fetchAll(url) {
 		})
 		.catch((error) => console.log(error));
 	return results;
-	// try {
-	// 	const results = [];
-	// 	let hasNext = false;
-	// 	do {
-	// 		hasNext = false;
-	// 		let r = await axios.get(url);
-	// 		let response = r.data;
-	// 		results.push(
-	// 			...response.results.map((e) => ({
-	// 				id: e.id,
-	// 				name: e.name,
-	// 				background_image: e.background_image,
-	// 				genres: e.genres.map((r) => r.name),
-	// 			}))
-	// 		);
-	// 		if (response.next && results.length < 100) {
-	// 			hasNext = true;
-	// 			url = response.next;
-	// 		}
-	// 	} while (hasNext);
-	// 	return results;
-	// } catch (error) {
-	// 	console.log(error);
-	// }
 }
 
 module.exports = {
@@ -56,12 +33,27 @@ module.exports = {
 		try {
 			const { name } = req.query;
 			if (name && typeof name == "string") {
-				console.log("Searching");
-				let searchResults = await axios.get(
+				let DBResults = await Videogame.findAll({
+					where: {
+						name: {
+							[Op.iLike]: `%${name}%`,
+						},
+					},
+					include: {
+						model: Genre,
+						as: "genres",
+						attributes: ["name"],
+					},
+				});
+				DBResults = DBResults.map((e) => ({
+					...e.dataValues,
+					genres: e.dataValues.genres.map((r) => r.name),
+				}));
+				let apiResults = await axios.get(
 					` https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`
 				);
 
-				searchResults = searchResults.data.results
+				apiResults = apiResults.data.results
 					.map((r) => ({
 						id: r.id,
 						name: r.name,
@@ -71,15 +63,15 @@ module.exports = {
 					}))
 					.splice(0, 15);
 
-				if (searchResults.length === 0) {
+				let results = [...DBResults, ...apiResults].splice(0, 15);
+				if (results.length === 0) {
 					results = { error: "There isn't any game with that name" };
 				}
-				return res.json(searchResults);
+				return res.json(results);
 			}
 			let APIData = await fetchAll(
 				`https://api.rawg.io/api/games?key=${API_KEY}`
 			);
-			console.log(APIData.length);
 			let DBData = await Videogame.findAll({
 				attributes: ["id", "name", "background_image", "rating"],
 				include: { model: Genre, attributes: ["name"] },

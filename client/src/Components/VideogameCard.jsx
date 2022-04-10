@@ -11,6 +11,9 @@ export const VideogameCard = ({
 	background_image,
 	rating,
 }) => {
+	genres = genres.map((genre) =>
+		genre === "Massively Multiplayer" ? "MMO" : genre
+	);
 	return (
 		<div id={wrapper}>
 			<img

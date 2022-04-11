@@ -28,7 +28,7 @@ export default function VideogameDetails({ videogameID: id }) {
 		return () => {
 			dispatch(clearVideogameDetails());
 		};
-	}, []);
+	}, [dispatch, id]);
 	return (
 		<div
 			id={wrapper}

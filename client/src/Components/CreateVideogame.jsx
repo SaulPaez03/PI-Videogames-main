@@ -34,6 +34,10 @@ export default function CreateVideogame() {
 	const [nameError, setNameError] = useState({ ...errorSnippet });
 
 	const [description, setDescription] = useState("");
+	const [descriptionError, setDescriptionError] = useState({
+		...errorSnippet,
+	});
+
 	const [rating, setRating] = useState(0);
 
 	const [release, setRelease] = useState("2000-01-01");
@@ -55,8 +59,11 @@ export default function CreateVideogame() {
 		validateName(name);
 	}, [name]);
 	useEffect(() => {
+		validateDescription(description);
+	}, [description]);
+	useEffect(() => {
 		dispatch(getAllGenres());
-	}, []);
+	}, [dispatch]);
 	useEffect(() => {
 		if (genreError.err) {
 			alert(genreError.msg);
@@ -90,6 +97,25 @@ export default function CreateVideogame() {
 			return false;
 		}
 		setNameError({
+			err: false,
+			msg: "",
+		});
+		return true;
+	};
+	const handleDescriptionChange = (description) => {
+		validateDescription(description);
+		setDescription(description);
+	};
+
+	const validateDescription = (name) => {
+		if (name === "") {
+			setDescriptionError({
+				err: true,
+				msg: "Description cannot be empty!",
+			});
+			return false;
+		}
+		setDescriptionError({
 			err: false,
 			msg: "",
 		});
@@ -225,19 +251,8 @@ export default function CreateVideogame() {
 						value={name}
 						onChange={(e) => handleNameChange(e.target.value)}
 						className={nameError.err ? nameErrorClass : ""}
+						placeholder={nameError.msg}
 					/>
-					{nameError.err && (
-						<span
-							style={{
-								fontSize: "20px",
-								position: "fixed",
-								top: "33vh",
-								right: "20vw",
-							}}
-						>
-							{nameError.msg}
-						</span>
-					)}
 				</div>
 				<label htmlFor="description">Description</label>
 				<textarea
@@ -245,7 +260,9 @@ export default function CreateVideogame() {
 					name="description"
 					id={descriptionInput}
 					value={description}
-					onChange={(e) => setDescription(e.target.value)}
+					onChange={(e) => handleDescriptionChange(e.target.value)}
+					className={descriptionError.err ? nameErrorClass : ""}
+					placeholder={descriptionError.msg}
 				/>
 				<div className={paralel}>
 					<div className={inputBox}>

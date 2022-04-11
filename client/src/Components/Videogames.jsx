@@ -64,12 +64,12 @@ export default function Videogames() {
 		//fetch API on first load
 		dispatch(getAllVideogames());
 		dispatch(getAllGenres());
-	}, []);
+	}, [dispatch]);
 	//on displayedVideogamesUpdate
 	useEffect(() => {
 		setCurrentPage(1);
 		setPageCount(Math.ceil(displayedVideogames.length / valuesPerPage));
-	}, [displayedVideogames]);
+	}, [displayedVideogames, valuesPerPage]);
 
 	//on videogames and valuesPerPage  uptade
 	useEffect(() => {
@@ -88,6 +88,11 @@ export default function Videogames() {
 	//onSearchResults update
 	useEffect(() => {
 		if (searchResults.length) setDisplayedVideogames(searchResults);
+		else if (searchResults.error) {
+			alert("No results found");
+			dispatch(clearSearchResults());
+			setDisplayedVideogames(videogames);
+		}
 	}, [searchResults]);
 
 	const paginate = (number) => {

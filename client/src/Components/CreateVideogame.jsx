@@ -189,14 +189,17 @@ export default function CreateVideogame() {
 	const handleCreate = async (event) => {
 		event.preventDefault();
 		if (validateAll()) {
-			const posted = await axios.post("http://localhost:3001/videogame", {
-				name,
-				description,
-				rating,
-				released: release,
-				genres: selectedGenres,
-				platforms,
-			});
+			const posted = await axios.post(
+				"https://pi-videogames-back.onrender.com/videogame",
+				{
+					name,
+					description,
+					rating,
+					released: release,
+					genres: selectedGenres,
+					platforms,
+				}
+			);
 			alert(posted.data);
 		}
 	};

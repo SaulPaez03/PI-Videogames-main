@@ -31,6 +31,7 @@ async function fetchAll(url) {
 module.exports = {
 	async getAllVideoGames(req, res) {
 		try {
+			console.log("getAllVideoGames");
 			const { name } = req.query;
 			if (name && typeof name == "string") {
 				let DBResults = await Videogame.findAll({

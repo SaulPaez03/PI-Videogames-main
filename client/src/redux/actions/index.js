@@ -9,7 +9,7 @@ export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES",
 export const getAllVideogames = () => {
 	return async (dispatch) => {
 		const r = await axios.get(
-			`https://pi-videogames-back.onrender.com/videogames`
+			`https://pi-videogames-back.onrender.com:3001/videogames`
 		);
 		const results = r.data;
 		dispatch({ type: GET_ALL_VIDEOGAMES, payload: results });

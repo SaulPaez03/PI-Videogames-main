@@ -10,7 +10,7 @@ export const GET_ALL_VIDEOGAMES = "GET_ALL_VIDEOGAMES",
 export const getAllVideogames = () => {
 	return async (dispatch) => {
 		try {
-			const r = await axios.get(`http://localhost:3001/videogames`);
+			const r = await axios.get(`/videogames`);
 			const results = r.data;
 			dispatch({ type: GET_ALL_VIDEOGAMES, payload: results });
 		} catch (e) {
@@ -19,15 +19,13 @@ export const getAllVideogames = () => {
 	};
 };
 export const getVideogameDetails = (videogameId) => async (dispatch) => {
-	const r = await axios.get(`http://localhost:3001/videogame/${videogameId}`);
+	const r = await axios.get(`/videogame/${videogameId}`);
 	const results = r.data;
 	return dispatch({ type: GET_VIDEOGAME_DETAILS, payload: results });
 };
 export const getVideogamesByName = (name) => async (dispatch) => {
 	try {
-		const r = await axios.get(
-			`http://localhost:3001/videogames?name=${name}`
-		);
+		const r = await axios.get(`/videogames?name=${name}`);
 		const results = r.data;
 		dispatch({ type: SEARCH_VIDEOGAMES, payload: results });
 	} catch (e) {
@@ -37,7 +35,7 @@ export const getVideogamesByName = (name) => async (dispatch) => {
 
 export const getAllGenres = () => async (dispatch) => {
 	try {
-		const r = await axios.get(`http://localhost:3001/genres`);
+		const r = await axios.get(`/genres`);
 		const results = r.data.map((genre) => genre.name);
 		dispatch({ type: GET_ALL_GENRES, payload: results });
 	} catch (e) {

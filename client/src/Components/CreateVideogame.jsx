@@ -192,17 +192,14 @@ export default function CreateVideogame() {
 		event.preventDefault();
 		if (validateAll()) {
 			try {
-				const posted = await axios.post(
-					"http://localhost:3001/videogame",
-					{
-						name,
-						description,
-						rating,
-						released: release,
-						genres: selectedGenres,
-						platforms,
-					}
-				);
+				const posted = await axios.post("/videogame", {
+					name,
+					description,
+					rating,
+					released: release,
+					genres: selectedGenres,
+					platforms,
+				});
 				if (posted.data.error) {
 					alert(posted.data.error);
 					return;

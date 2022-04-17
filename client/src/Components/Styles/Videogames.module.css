@@ -29,7 +29,6 @@
 	align-items: center;
 	justify-content: center;
 	background-color: #111419;
-	overflow-y: scroll;
 }
 #sidebar {
 	position: fixed;

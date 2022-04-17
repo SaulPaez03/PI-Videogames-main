@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllGenres } from "../redux/actions";
+import { useHistory } from "react-router-dom";
 
 import {
 	wrapper,
@@ -29,6 +30,7 @@ const errorSnippet = {
 export default function CreateVideogame() {
 	const dispatch = useDispatch();
 	const genres = useSelector((state) => state.genres);
+	const history = useHistory();
 
 	const [name, setName] = useState("");
 	const [nameError, setNameError] = useState({ ...errorSnippet });
@@ -189,18 +191,27 @@ export default function CreateVideogame() {
 	const handleCreate = async (event) => {
 		event.preventDefault();
 		if (validateAll()) {
-			const posted = await axios.post(
-				"https://pi-videogames-back.onrender.com/videogame",
-				{
-					name,
-					description,
-					rating,
-					released: release,
-					genres: selectedGenres,
-					platforms,
+			try {
+				const posted = await axios.post(
+					"http://localhost:3001/videogame",
+					{
+						name,
+						description,
+						rating,
+						released: release,
+						genres: selectedGenres,
+						platforms,
+					}
+				);
+				if (posted.data.error) {
+					alert(posted.data.error);
+					return;
 				}
-			);
-			alert(posted.data);
+				alert(posted.data);
+				history.push("/videogames");
+			} catch (e) {
+				console.log(e);
+			}
 		}
 	};
 	const validateAll = () => {

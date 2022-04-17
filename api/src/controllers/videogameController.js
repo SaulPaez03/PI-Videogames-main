@@ -90,6 +90,7 @@ module.exports = {
 			res.send("Succesfully created the new videogame");
 		} catch (error) {
 			console.log(error);
+			res.json({ error: "Something went wrong, try again" });
 		}
 	},
 };

@@ -1,4 +1,5 @@
 import {
+	CLEAR_ALL_VIDEOGAMES,
 	CLEAR_SEARCH_RESULTS,
 	CLEAR_VIDEOGAMES_DETAILS,
 	GET_ALL_GENRES,
@@ -18,11 +19,12 @@ const reducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case GET_ALL_VIDEOGAMES:
 			return { ...state, videogames: payload };
+		case CLEAR_ALL_VIDEOGAMES:
+			return { ...state, videogames: [] };
 		case GET_VIDEOGAME_DETAILS:
 			return { ...state, videogameDetails: payload };
 		case CLEAR_VIDEOGAMES_DETAILS:
 			return { ...state, videogameDetails: {} };
-
 		case SEARCH_VIDEOGAMES:
 			return { ...state, searchResults: payload };
 		case CLEAR_SEARCH_RESULTS:

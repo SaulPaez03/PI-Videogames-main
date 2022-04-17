@@ -4,6 +4,7 @@ import {
 	clearSearchResults,
 	getAllGenres,
 	getAllVideogames,
+	clearAllVideogames,
 	getVideogamesByName,
 } from "../redux/actions";
 import { Link } from "react-router-dom";
@@ -64,6 +65,11 @@ export default function Videogames() {
 		//fetch API on first load
 		dispatch(getAllVideogames());
 		dispatch(getAllGenres());
+
+		return () => {
+			dispatch(clearAllVideogames());
+			dispatch(clearSearchResults());
+		};
 	}, [dispatch]);
 	//on displayedVideogamesUpdate
 	useEffect(() => {

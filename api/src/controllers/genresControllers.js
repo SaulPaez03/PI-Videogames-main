@@ -18,5 +18,26 @@ module.exports = {
 		} catch (error) {
 			console.log(error);
 		}
-	},
+	}
+	// getAllGenres(req, res) {
+	// 	Genre.findAll({ attributes: ["name"] }).then((r) => {
+	// 		if (!r.length) {
+	// 			let url = `https://api.rawg.io/api/genres?key=${API_KEY}`;
+	// 			axios.get(url).then((r) => {
+	// 				let results = r.data.results.map((videogame) => ({
+	// 					name: videogame.name,
+	// 				}));
+	// 				Genre.bulkCreate(results).then(() => {
+	// 					Genre.findAll({ attributes: ["name"] }).then((r) => {
+	// 						console.log("created");
+	// 						return res.json(r);
+	// 					});
+	// 				});
+	// 			});
+	// 		} else {
+	// 			console.log("already created");
+	// 			return res.json(r);
+	// 		}
+	// 	});
+	// },
 };

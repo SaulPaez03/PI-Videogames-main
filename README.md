@@ -4,7 +4,7 @@
 
 # Individual Project - Videogames App
 
-<p align="right">
+<p align="center">
   <img height="200" src="./videogame.png" />
 </p>
 

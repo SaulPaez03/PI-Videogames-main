@@ -40,5 +40,6 @@
 - [ ] Home Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1653420518/PI-Home_aiigut.png" />
 - [ ] Videogame Details Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1653420519/PI-VideogameDetails_czvsvf.png" />
 - [ ] Videogame Create Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1653420517/PI-CreateForm_er3rhv.png" />
+- [ ] Created Videogame Details Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1653420517/PI-Created_Videogame_Details_tims9q.png" />
       
 

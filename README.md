@@ -36,10 +36,10 @@
 - [ ] Sequelize - Postgres
 
 ## Project Screens:
-- [ ] Landing Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1653420518/PI-Landing_zuw4dv.png" />
-- [ ] Home Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1653420518/PI-Home_aiigut.png" />
-- [ ] Videogame Details Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1653420519/PI-VideogameDetails_czvsvf.png" />
-- [ ] Videogame Create Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1653420517/PI-CreateForm_er3rhv.png" />
-- [ ] Created Videogame Details Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1653420517/PI-Created_Videogame_Details_tims9q.png" />
+- [ ] Landing Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1688578058/Screenshot_2023-07-05_132651_p2x8zc.png" />
+- [ ] Home Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1688578461/Screenshot_2023-07-05_133354_ezz6qs.png" />
+- [ ] Videogame Details Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1688578546/Screenshot_2023-07-05_133522_q7pphp.png" />
+- [ ] Videogame Create Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1688578667/Screenshot_2023-07-05_133735_q8uqmr.png" />
+- [ ] Created Videogame Details Page: <img src="https://res.cloudinary.com/dyqejl4cd/image/upload/v1688578838/Screenshot_2023-07-05_134021_tucubx.png" />
       
 
